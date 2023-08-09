@@ -24,9 +24,9 @@ const BannerMiddle = () => {
     "https://miamigardensflorist.com/pub/media/revslider/valentine.jpg";
   return (
     <>
-      <Wraper lg={12} sm={12} md={12} container>
-        {BannerMiddle_imgUrl.map((image) => (
-          <Grid item lg={4} md={4} sm={12} xs={12}>
+      <Wraper item lg={12} sm={12} md={12} container>
+        {BannerMiddle_imgUrl.map((image,index) => (
+          <Grid key={index} item lg={4} md={4} sm={12} xs={12}>
             <img src={image} alt="" style={{ width: "100%" }} />
           </Grid>
         ))}
