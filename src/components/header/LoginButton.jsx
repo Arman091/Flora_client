@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ButtonCss = styled(Button)`
-  color: white;
+ color:white;
   height: 32px;
   font-size: 15px;
   text-transform: none;

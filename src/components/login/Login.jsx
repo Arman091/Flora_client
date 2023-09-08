@@ -23,26 +23,35 @@ const LoginButton = styled(Button)`
   margin-top: 6px;
   margin-bottom: 10px;
   cursor: pointer;
+  &:hover {
+    background-color: #6ba99a;
+  };
 `;
 const SignupButton = styled(Button)`
   text-transform: none;
-  background-color:  #51875f;
+  background-color: #51875f;
   color: white;
   height: 30px;
   border-radius: 31px;
   margin-top: 6px;
   margin-bottom: 10px;
   cursor: pointer;
+  &:hover {
+    background-color: #6ba99a;
+  };
 `;
 
 const OtpButton = styled(Button)`
   text-transform: none;
-  background-color:  #51875f;
+  background-color: #51875f;
   color: white;
   height: 30px;
   border-radius: 31px;
   margin-top: 6px;
   cursor: pointer;
+  &:hover {
+    background-color: #6ba99a;
+  };
 `;
 
 const WraperLogin = styled(Box)`
