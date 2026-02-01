@@ -4,33 +4,53 @@ import Search from "./Search";
 import LoginButton from "./LoginButton";
 import { Link } from "react-router-dom";
 import './Header.css'
+import { LOGO } from "../../lib/config";
 const StyledHeader = styled(AppBar)`
   
   
-  height: 100px;
+  height: 90px;
 `;
 
 const CustomWraper = styled(Box)`
-  margin: 0 5% 0 auto;
+  width: 50%;
+  display: flex;
 `;
 const Header = () => {
   return (
     <div>
-      <StyledHeader style={{ 'backgroundColor': "black"}} >
+      <StyledHeader style={{ 'backgroundColor': "#00827B"}} >
         <Toolbar className="mytoolbar">
           <Link to="/">
+           <div className="logo_container">
             <img
-              src="../images/logo.png"
+              src={LOGO}
               alt="logo"
-              style={{ width: 200, height: 80, marginLeft: 30 }}
-            />
+               style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain', // scales logo to fit container
+              }}
+              />
+            </div>
           </Link>
-          <Search />  
+          {/* <Search />   */}
           <CustomWraper>
             <LoginButton />
           </CustomWraper>
         </Toolbar>
       </StyledHeader>
+       <style>
+        {`
+          .logo_container {
+            height: 90px;
+            margin-left: 30px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        `}
+      </style>
     </div>
   );
 };

@@ -1,5 +1,6 @@
-.mytoolbar{
-    margin-top: 23px;
-   ;
-}
 
+.mytoolbar{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10%;
+}

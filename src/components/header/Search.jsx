@@ -7,9 +7,7 @@ const SearchBarCSS = styled(Box)`
   width: 25%;
   height: 30px;
   margin-left: 23px;
-  margin-top:23px;
   border-radius: 3px;
-  margin-bottom: 7px;
   display: flex;
 `;
 const SIcon = styled(SearchIcon)`

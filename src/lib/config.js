@@ -1,0 +1,1 @@
+export const LOGO = '/images/ketes_logo_2.png';
