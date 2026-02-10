@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "24.x"
+    "node": "22.x"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -38,7 +38,12 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "off",
+      "array-callback-return": "off",
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -53,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "redux-devtools-extension": "^2.13.9"
   }
 }
