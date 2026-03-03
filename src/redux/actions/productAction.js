@@ -1,30 +1,30 @@
 import axios from "axios";
-import * as actionTypes from "../constants/productConstant";
+import {
+  getProductsSuccess,
+  getProductsFail,
+  getProductRequest,
+  getProductSuccess,
+  getProductFail,
+} from "../reducers/prductReducer";
 
-const URL = " https://floralcart.onrender.com";
+const URL = "https://floralcart.onrender.com";
+
 export const getAllProducts = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${URL}/products`);
-    // 5. from here data will go inside product reducer 
-    dispatch({ type: actionTypes.GET_ALL_PRODUCTS_SUCCESS, payload: data });
+    dispatch(getProductsSuccess(data));
   } catch (error) {
-    dispatch({
-      type: actionTypes.GET_ALL_PRODUCTS_FAIL,
-      payload: error.message,
-    });
+    dispatch(getProductsFail(error.message));
   }
 };
 
 export const getProductDetail = (id) => async (dispatch) => {
   try {
-    dispatch({ type: actionTypes.GET_PRODUCT_DETAIL });
+    dispatch(getProductRequest());
     const { data } = await axios.get(`${URL}/product/${id}`);
 
-    dispatch({ type: actionTypes.GET_PRODUCT_DETAIL_SUCCESS, payload: data });
+    dispatch(getProductSuccess(data));
   } catch (error) {
-    dispatch({
-      type: actionTypes.GET_PRODUCT_DETAIL_FAIL,
-      payload: error.message,
-    });
+    dispatch(getProductFail(error.message));
   }
 };

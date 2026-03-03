@@ -1,32 +1,53 @@
-import * as actionTypes from "../constants/productConstant";
+import { createSlice } from "@reduxjs/toolkit";
 
+// Slice for handling the list of all products
+const allProductsSlice = createSlice({
+  name: "allProducts",
+  initialState: { products: [] },
+  reducers: {
+    getProductsSuccess: (state, action) => {
+      state.products = action.payload;
+    },
+    getProductsFail: (state, action) => {
+      state.error = action.payload;
+    },
+  },
+});
 
-const getAllProductsReducer = (state = { products: [] }, action) => {
-  switch (action.type) {
-    case actionTypes.GET_ALL_PRODUCTS_SUCCESS:
-      return { products: action.payload };
-    case actionTypes.GET_ALL_PRODUCTS_FAIL:
-      return { error: action.payload };
-    default:
-      return state;
-  }
-};
+// Slice for handling individual product details
+const productDetailSlice = createSlice({
+  name: "productDetail",
+  initialState: { product: {}, loading: false },
+  reducers: {
+    getProductRequest: (state) => {
+      state.loading = true;
+    },
+    getProductSuccess: (state, action) => {
+      state.loading = false;
+      state.product = action.payload;
+    },
+    getProductFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    getProductReset: (state) => {
+      state.product = {};
+    },
+  },
+});
 
-export default getAllProductsReducer;
+// Exporting actions to be used in the action creators (next step)
+export const { 
+  getProductsSuccess, 
+  getProductsFail 
+} = allProductsSlice.actions;
 
-export const getProductDetailReducer = (state = { product: {} }, action) => {
-  switch (action.type) {
-    case actionTypes.GET_PRODUCT_DETAIL:
-      return { loading: true };
-    case actionTypes.GET_PRODUCT_DETAIL_SUCCESS:
-      return { loading: false, product: action.payload };
-    case actionTypes.GET_PRODUCT_DETAIL_FAIL:
-      return { loading: false, error: action.payload };
-    case actionTypes.GET_PRODUCT_DETAIL_RESET:
-      return { product: {} };
-    default:
-      return state;
-  }
-};
+export const { 
+  getProductRequest, 
+  getProductSuccess, 
+  getProductFail, 
+  getProductReset 
+} = productDetailSlice.actions;
 
-
+export const getProductDetailReducer = productDetailSlice.reducer;
+export default allProductsSlice.reducer;

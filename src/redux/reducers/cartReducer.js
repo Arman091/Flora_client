@@ -1,29 +1,30 @@
-import * as actionTypes from "../constants/cartConstant";
-export const cartReducer = (state = { cartItems: [] }, action) => {
-  switch (action.type) {
-    case actionTypes.ADD_TO_CART:
+import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: { cartItems: [] },
+  reducers: {
+    addToCart: (state, action) => {
       const item = action.payload;
-      const exist = state.cartItems.find((product) => product.id === item.id);
+      const existIndex = state.cartItems.findIndex((p) => p.id === item.id);
 
-      if (exist) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((data) =>
-            data.product === exist.product ? item : data
-          ),
-        };
+      if (existIndex !== -1) {
+        // If item exists, replace it with the updated one
+        state.cartItems[existIndex] = item;
       } else {
-        return { ...state, cartItems: [...state.cartItems, item] };
+        // If it doesn't exist, just push it to the array
+        state.cartItems.push(item);
       }
+    },
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter(
+        (product) => product.id !== action.payload
+      );
+    },
+  },
+});
 
-    case actionTypes.REMOVE_FROM_CART:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter(
-          (product) => product.id !== action.payload
-        ),
-      };
-    default:
-      return state;
-  }
-};
+export const { addToCart, removeFromCart } = cartSlice.actions;
+
+export const cartReducer = cartSlice.reducer;
+export default cartSlice.reducer;

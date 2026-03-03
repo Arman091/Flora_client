@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../../redux/actions/productAction";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/system";
 import { Grid, styled } from "@mui/material";
 import ActionItems from "./ActionItems";
