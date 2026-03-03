@@ -1,17 +1,17 @@
 import axios from "axios";
-import * as actionTypes from "../constants/cartConstant";
+import { addToCart as add, removeFromCart as remove } from "../reducers/cartReducer";
 
 const URL = "https://floralcart.onrender.com";
 
 export const addToCart = (id, quantity) => async (dispatch) => {
   try {
     const { data } = await axios.get(`${URL}/product/${id}`);
-    dispatch({ type: actionTypes.ADD_TO_CART, payload: { ...data, quantity } });
+    dispatch(add({ ...data, quantity }));
   } catch (error) {
-    dispatch({ type: actionTypes.ADD_TO_CART_ERROR, payload: error.message });
+    console.log("Error while calling add to cart API", error.message);
   }
 };
 
-export const removeFromCart = (id) => async (dispatch) => {
-  dispatch({ type: actionTypes.REMOVE_FROM_CART, payload: id });
+export const removeFromCart = (id) => (dispatch) => {
+  dispatch(remove(id));
 };
