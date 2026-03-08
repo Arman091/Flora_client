@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ButtonCss = styled(Button)`
- color:white;
+  color:var(--color-text-primary);
   height: 32px;
   font-size: 15px;
   text-transform: none;
@@ -28,7 +28,7 @@ const BoxWraper = styled(Box)`
 const CartBox = styled(Link)`
   display: flex;
   text-decoration: none;
-  color: white;
+  color: var(--color-text-primary);
   padding-top:5px
 `;
 

@@ -18,7 +18,7 @@ const CustomWraper = styled(Box)`
 const Header = () => {
   return (
     <div>
-      <StyledHeader style={{ 'backgroundColor': "#00827B"}} >
+      <StyledHeader style={{ 'backgroundColor': "var(--background-primary)"}} >
         <Toolbar className="mytoolbar">
           <Link to="/">
            <div className="logo_container">
@@ -29,6 +29,8 @@ const Header = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain', // scales logo to fit container
+                scale:'1',
+                marginTop:'16px'
               }}
               />
             </div>
@@ -42,9 +44,9 @@ const Header = () => {
        <style>
         {`
           .logo_container {
-            height: 90px;
+            height: 75px;
+            width: 251px;
             margin-left: 30px;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;

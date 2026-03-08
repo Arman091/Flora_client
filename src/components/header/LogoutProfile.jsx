@@ -13,7 +13,7 @@ const Signout = styled(Typography)`
 `;
 
 const SignoutIcon = styled(PowerSettingsNewIcon)`
-  color: white;
+  color: var(--color-text-primary);
 
 `;
 
@@ -36,7 +36,10 @@ const LogoutProfile = ({ accountName, setAccountName }) => {
   return (
     <>
       <Box onClick={handleClick}>
-        <Typography style={{ marginTop: 3, cursor:"pointer" }}>{accountName}</Typography>
+        <Typography 
+          style={{ marginTop: 3, cursor:"pointer", color: "var(--color-text-primary)", marginRight: 18 }}>
+          {accountName}
+        </Typography>
         <Component
           id="basic-menu"
           anchorEl={open}
