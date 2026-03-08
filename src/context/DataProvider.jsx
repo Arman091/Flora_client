@@ -7,7 +7,6 @@ export const DataContext = createContext(null);
 const DataProvider = ({ children }) => {
   const [accountName, setAccountName] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false)
-  console.log(isLoggedIn)
   return (
     <DataContext.Provider
       value={{
