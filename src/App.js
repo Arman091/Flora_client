@@ -5,11 +5,26 @@ import DataProvider from "./context/DataProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductDetail from "./components/details/ProductDetail";
 import Cart from "./components/cart/Cart";
-
+import useFcmToken from "./firebase/useFcmToken";
+import { useEffect } from "react";
+const filePath='./firebase-messaging-sw.js'
 function App() {
+  const { token, permissionStatus } = useFcmToken();
+  console.log(`Notification permission is ${permissionStatus}`);
+  // useEffect(() => {
+  //   if ('serviceWorker' in navigator) {
+  //     navigator.serviceWorker
+  //       .register('/firebase-messaging-sw.js')
+  //       .then((registration) => {
+           
+  //       })
+  //       .catch((error) => {
+  //         // Service worker registration failed silently
+  //       });
+  //   }
+  // }, []);
   return (
     <DataProvider>
-      <BrowserRouter>
         <Header />
         <Box style={{ marginTop: 55 }}>
           <Routes>
@@ -18,7 +33,6 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
-      </BrowserRouter>
     </DataProvider>
   );
 }
