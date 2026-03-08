@@ -3,12 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 // Slice for handling the list of all products
 const allProductsSlice = createSlice({
   name: "allProducts",
-  initialState: { products: [] },
+  initialState: { products: [], loading: false },
   reducers: {
+    getProductsRequest: (state) => {
+      state.loading = true;
+    },
     getProductsSuccess: (state, action) => {
+      state.loading = false;
       state.products = action.payload;
     },
     getProductsFail: (state, action) => {
+      state.loading = false;
       state.error = action.payload;
     },
   },
@@ -39,7 +44,8 @@ const productDetailSlice = createSlice({
 // Exporting actions to be used in the action creators (next step)
 export const { 
   getProductsSuccess, 
-  getProductsFail 
+  getProductsFail,
+  getProductsRequest
 } = allProductsSlice.actions;
 
 export const { 

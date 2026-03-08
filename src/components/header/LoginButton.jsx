@@ -18,7 +18,7 @@ const ButtonCss = styled(Button)`
 
 const BoxWraper = styled(Box)`
   display: flex;
-  margin: 0 3% 0 auto;
+  margin: 24px 3% 0 auto;
   & > Button,
   & > p {
     margin-right: 40px;
