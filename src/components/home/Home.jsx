@@ -4,36 +4,32 @@ import Banner from "./Banner";
 import { Box } from "@mui/material";
 import {getAllProducts} from '../../redux/actions/productAction'
 import { useEffect } from "react";
-import { useDispatch} from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductComponent from "./ProductComponent";
 import BannerMiddle from "./BannerMiddle";
+import Loader from "../loader/loader";
 const Home = () => {
-  const [Allproducts, setProducts] = useState([]);
-  async function myproducts() {
-    let response = fetch("https://floralcart.onrender.com/products");
-    let data = await response;
-    let productsarray = await data.json();
-    setProducts(productsarray);
-  }
+  const { loading, products } = useSelector(state => state.getAllProducts);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     ///2.  getALlProducts was called using dispatch
     dispatch(getAllProducts());
-    myproducts();
   }, [dispatch]);
 
   return (
     <>
+      {loading ? <Loader /> :
       <Box>
         <Banner />
         <ProductComponent
-          products={Allproducts}
+          products={products}
           title="Products"
           timer={true}
         />
         <BannerMiddle />
       </Box>
+      }
     </>
   );
 };

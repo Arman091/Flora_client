@@ -1,1 +1,1 @@
-export const LOGO = '/images/ketes_logo_2.png';
+export const LOGO = '/images/floral_cart_1.jpg';
