@@ -8,6 +8,9 @@ const useFcmToken = () => {
 
   const [token, setToken] = useState(null);
   const [permissionStatus, setPermissionStatus] = useState(null);
+  // for in-app notification if chrome popup is closed
+  const [latestNotification, setLatestNotification] = useState(null);
+  const notificationTimerRef = useRef(null);
 
   const retryCount = useRef(0);
   const loading = useRef(false);
@@ -98,13 +101,25 @@ const useFcmToken = () => {
         const link =
           payload?.fcmOptions?.link || payload?.data?.link || '/';
 
-        const notification = new Notification(
-          payload?.notification?.title || 'New Notification',
-          {
-            body: payload?.notification?.body || 'You have a new message',
-            data: { url: link }
-          }
-        );
+        const title = payload?.notification?.title || 'New Notification';
+        const body = payload?.notification?.body || 'You have a new message';
+
+        const notification = new Notification(title, {
+          body,
+          data: { url: link }
+        });
+
+        // Update in-app notification state
+        setLatestNotification({ title, body, link });
+
+        // Auto-clear after 5 seconds
+        if (notificationTimerRef.current) {
+          clearTimeout(notificationTimerRef.current);
+        }
+        notificationTimerRef.current = setTimeout(() => {
+          setLatestNotification(null);
+          notificationTimerRef.current = null;
+        }, 5000);
 
         notification.onclick = (event) => {
           window.focus();
@@ -130,7 +145,8 @@ const useFcmToken = () => {
 
   return {
     token,
-    permissionStatus
+    permissionStatus,
+    latestNotification,
   };
 };
 
