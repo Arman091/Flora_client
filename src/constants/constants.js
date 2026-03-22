@@ -9,6 +9,7 @@ const FORM_KEYS = {
   PASSWORD: "password",
   CONFIRM_PASSWORD: "confirmPassword",
   ACCEPT_TERMS: "acceptTerms",
+  ROLE: "role",
 };
 
 export default FORM_KEYS;

@@ -1,5 +1,6 @@
 // src/validation/signupSchema.js
 import { z } from "zod";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
 import {
   EMAIL_REGEX,
   INTERNATIONAL_PHONE_REGEX,
@@ -31,11 +32,11 @@ export const signupSchema = z.object({
     .regex(EMAIL_REGEX, "Invalid email format"),
 
   [FORM_KEYS.PHONE]: z
-  .string({
-    required_error: "Phone number is required",
-    invalid_type_error: "Phone number must be a string",
-  })
-  .min(1, "Phone number is required"),
+    .string({
+      required_error: "Phone number is required",
+    })
+    .min(1, "Phone number is required")
+    .refine(isPossiblePhoneNumber, { message: "Invalid phone number format" }),
 
   [FORM_KEYS.PASSWORD]: z
     .string()
@@ -47,4 +48,9 @@ export const signupSchema = z.object({
       PASSWORD_REGEX,
       "Password must be at least 8 characters, contain one uppercase letter and one number"
     ),
+
+  [FORM_KEYS.ROLE]: z
+    .string({ required_error: "Role is required" })
+    .min(1, "Please select a role")
+    .refine((val) => ["Admin", "regular"].includes(val)),
 });

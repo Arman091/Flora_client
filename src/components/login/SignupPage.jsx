@@ -15,6 +15,7 @@ import { parsePhoneNumber, formatPhoneNumber } from "react-phone-number-input";
 
 import FormInput from "../common/form-input";
 import PhoneInput from "../common/phone-number-input";
+import FormSelect from "../common/FormSelect";
 import { signupSchema } from "../../validations/signupSchema.js";
 import FORM_KEYS from "../../constants/constants.js";
 import en from "../../locales/en.json";
@@ -22,6 +23,11 @@ import { ALLOWED_COUNTRIES, DEFAULT_COUNTRY, LOGO } from "../../lib/config.js";
 
 // Optional: extract signup copy from locales
 const t = en.signup;
+
+const roleOptions = [
+  { value: "Admin", label: "Admin" },
+  { value: "regular", label: "Regular User" },
+];
 
 export const SignupPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -187,6 +193,17 @@ export const SignupPage = () => {
                   type="password"
                 />
               </Grid>
+
+              <Grid item xs={12}>
+                <FormSelect
+                  name={FORM_KEYS.ROLE}
+                  control={control}
+                  label="Role"
+                  error={errors[FORM_KEYS.ROLE]}
+                  options={roleOptions}
+                  tabIndex={6}
+                />
+              </Grid>
             </Grid>
 
             {submitError && (
@@ -216,7 +233,7 @@ export const SignupPage = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                disabled={isSubmitting}
+                disabled={isSubmitting || Object.keys(errors).length > 0}
                 sx={{
                   textTransform: "none",
                   borderRadius: 2,
