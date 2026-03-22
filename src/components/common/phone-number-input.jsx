@@ -2,9 +2,10 @@ import React from "react";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import "react-phone-number-input/style.css";
 import styled from "@emotion/styled";
+import { Typography } from "@mui/material";
 
-const StyledPhoneInput = styled(PhoneInputWithCountry)(({ theme }) => ({
-  "--border-primary": "#0000003B",
+const StyledPhoneInput = styled(PhoneInputWithCountry)(({ theme, error }) => ({
+  "--border-primary": error ? "#d32f2f" : "#0000003B",
 
   display: "flex",
   alignItems: "center",
@@ -61,6 +62,7 @@ const PhoneInput = ({
   label = "Phone Number",
   defaultValue = "",
   rules = {},
+  error,
   ...props
 }) => {
   return (
@@ -71,8 +73,21 @@ const PhoneInput = ({
         control={control}
         limitMaxLength={true}
         rules={rules}
+        error={!!error}
         {...props}
       />
+      {error && (
+        <Typography
+          variant="caption"
+          sx={{
+            color: "var(--color-error-main, #d32f2f)",
+            mt: 0.5,
+            ml: 1.5,
+          }}
+        >
+          {error.message}
+        </Typography>
+      )}
     </div>
   );
 };

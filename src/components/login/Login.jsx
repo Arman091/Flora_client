@@ -162,7 +162,7 @@ const LoginDialog = ({ open, setOpen }) => {
 
   return (
     <Dialog open={open} onClose={handleClose} >
-      <Component >
+      <Component style={{ height :"fit-content", padding:"40px 0px",}} >
         <Box style={{ display: "flex", height: "100%" }}>
           {account.view === "login" ? (
             <WraperLogin>
@@ -191,50 +191,6 @@ const LoginDialog = ({ open, setOpen }) => {
               </CreateAccount>
             </WraperLogin>
           ) : (
-            // <WraperSignup>
-            //   <TextField
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter FirstName"
-            //     name="firstName"
-            //   />
-            //   <TextField
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter LastName"
-            //     name="lastName"
-            //   />
-            //   <TextField
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter UserName"
-            //     name="userName"
-            //   />
-            //   <TextField
-            //     type="email"
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter Email"
-            //     name="email"
-            //   />
-            //   <TextField
-            //     type="number"
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter Phone Number"
-            //     name="phone"
-            //   />
-            //   <TextField
-            //     variant="standard"
-            //     onChange={(e) => onInputChange(e)}
-            //     label="Enter Password"
-            //     name="password"
-            //   />
-            //   <SignupButton onClick={() => signupUser()}>Continue</SignupButton>
-            //   <CreateAccount onClick={(e) => toggleSignup(e)}>
-            //     Have an Account? Click here to login
-            //   </CreateAccount>
-            // </WraperSignup>
             <>
             <SignupPage />
             </>

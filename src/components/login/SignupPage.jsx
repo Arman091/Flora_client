@@ -11,13 +11,14 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { parsePhoneNumber, formatPhoneNumber } from "react-phone-number-input";
 
 import FormInput from "../common/form-input";
 import PhoneInput from "../common/phone-number-input";
 import { signupSchema } from "../../validations/signupSchema.js";
 import FORM_KEYS from "../../constants/constants.js";
 import en from "../../locales/en.json";
-import { ALLOWED_COUNTRIES, DEFAULT_COUNTRY } from "../../lib/config.js";
+import { ALLOWED_COUNTRIES, DEFAULT_COUNTRY, LOGO } from "../../lib/config.js";
 
 // Optional: extract signup copy from locales
 const t = en.signup;
@@ -42,10 +43,21 @@ export const SignupPage = () => {
     setIsSubmitting(true);
     setSubmitError(null);
     setSubmitSuccess(null);
- 
+    console.log(values,"values")
+
+    const phoneNumber = values.phone ? parsePhoneNumber(values.phone) : undefined;
+
+    const dataToSend = {
+      ...values,
+      countryCode: phoneNumber?.country,
+      countryCallingCode: phoneNumber?.countryCallingCode,
+      formattedPhone: phoneNumber?.nationalNumber,
+    };
+
+    console.log(dataToSend,"dataToSend")
     try {
       // Adjust URL to match your backend signup endpoint
-      const response = await axios.post("/signup", values);
+      const response = await axios.post("/signup", dataToSend);
 
       if (response?.status >= 200 && response?.status < 300) {
         setSubmitSuccess(t?.success?.accountCreated || "Account created successfully.");
@@ -66,12 +78,13 @@ export const SignupPage = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
+        minHeight: "0",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         bgcolor: "var(--background-primary)",
         px: 2,
+        py:0,
       }}
     >
       <Container maxWidth="sm">
@@ -84,11 +97,20 @@ export const SignupPage = () => {
           }}
         >
           <Box mb={3} textAlign="center">
+            {LOGO && (
+              <Box sx={{ mb: 2 }}>
+                <img
+                  src={LOGO}
+                  alt="Application Logo"
+                  style={{ maxWidth: "150px", height: "auto" }}
+                />
+              </Box>
+            )}
             <Typography
               variant="h5"
-              sx={{ color: "var(--color-text-primary)", fontWeight: 600 }}
-            >
-              {t?.title || "Create your account"}
+              sx={{ color: "var(--color-text-primary)", fontWeight: 600, marginTop: "5px", marginBottom: "10px" }}
+             >
+              {t?.title}
             </Typography>
             {t?.subtitle && (
               <Typography
@@ -150,7 +172,7 @@ export const SignupPage = () => {
                   countries={ALLOWED_COUNTRIES}
                   label={t?.labels?.phone || "Phone Number"}
                   error={errors[FORM_KEYS.PHONE]}
-                  international
+                  international      
                   defaultCountry={DEFAULT_COUNTRY}
                   tabIndex={5}
                 />
