@@ -2,6 +2,7 @@ import { Typography, Box, MenuItem, Menu, styled } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { useAuth } from "../../context/AuthProvider";
 const Component = styled(Menu)`
   margin-top: 5px;
 `;
@@ -17,8 +18,9 @@ const SignoutIcon = styled(PowerSettingsNewIcon)`
 
 `;
 
-const LogoutProfile = ({ accountName, setAccountName }) => {
+const LogoutProfile = ({ user }) => {
   const [open, setOpen] = useState(false);
+  const { logout } = useAuth();
 
   const handleClick = (event) => {
     setOpen(event.currentTarget);
@@ -28,8 +30,8 @@ const LogoutProfile = ({ accountName, setAccountName }) => {
     setOpen(false);
   };
 
-  const Logout = () => {
-    setAccountName("");
+  const handleLogout = () => {
+    logout();
   };
 
 
@@ -38,7 +40,7 @@ const LogoutProfile = ({ accountName, setAccountName }) => {
       <Box onClick={handleClick}>
         <Typography 
           style={{ marginTop: 3, cursor:"pointer", color: "var(--color-text-primary)", marginRight: 18 }}>
-          {accountName}
+          {user?.firstName || user?.name }
         </Typography>
         <Component
           id="basic-menu"
@@ -49,7 +51,7 @@ const LogoutProfile = ({ accountName, setAccountName }) => {
           <MenuItem
             onClick={() => {
               handleClose();
-              Logout();
+              handleLogout();
             }}
           >
             <SignoutIcon  className="myicon"/>

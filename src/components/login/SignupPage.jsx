@@ -31,7 +31,7 @@ const roleOptions = [
   { value: "regular", label: "Regular User" },
 ];
 
-export const SignupPage = ({ open, setOpen }) => {
+export const SignupPage = ({ setOpen }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null);

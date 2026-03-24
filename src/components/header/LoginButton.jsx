@@ -3,8 +3,7 @@ import { Badge, Box, Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginDialog from "../login/Login";
-import { useState, useContext } from "react";
-import { DataContext } from "../../context/DataProvider";
+import { useState } from "react";
 import LogoutProfile from "./LogoutProfile";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -34,7 +33,7 @@ const CartBox = styled(Link)`
 
 const LoginButton = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
   const { cartItems } = useSelector((state) => state.cart);
   // console.log(cartItems.length);
   const openDialog = () => {
@@ -45,8 +44,7 @@ const LoginButton = () => {
     <BoxWraper>
       { user ? (
         <LogoutProfile
-          accountName={user.firstName}
-          setAccountName={setUser}
+          user={user}
         />
       ) : (
         <ButtonCss onClick={() => openDialog()}>Login</ButtonCss>
