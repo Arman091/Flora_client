@@ -5,14 +5,14 @@ import DataProvider from "./context/DataProvider";
 import { Routes, Route ,useNavigate} from "react-router-dom";
 import ProductDetail from "./components/details/ProductDetail";
 import Cart from "./components/cart/Cart";
+import {FcmProvider} from "./context/FcmProvider"
 import useFcmToken from "./firebase/useFcmToken";
 
 
 function App() {
-  const { token, permissionStatus ,latestNotification} = useFcmToken();
-  console.log(latestNotification,"latestNotification");
   return (
-    <DataProvider>
+    <FcmProvider>
+      <DataProvider>
         <Header />
         <Box style={{ marginTop: 55 }}>
           <Routes>
@@ -21,7 +21,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
-    </DataProvider>
+     </DataProvider>
+    </FcmProvider>
   );
 }
 

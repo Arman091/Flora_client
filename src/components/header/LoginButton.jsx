@@ -8,7 +8,7 @@ import { DataContext } from "../../context/DataProvider";
 import LogoutProfile from "./LogoutProfile";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useAuth } from "../../context/AuthProvider";
 const ButtonCss = styled(Button)`
   color:var(--color-text-primary);
   height: 32px;
@@ -34,7 +34,7 @@ const CartBox = styled(Link)`
 
 const LoginButton = () => {
   const [open, setOpen] = useState(false);
-  const { accountName, setAccountName } = useContext(DataContext);
+  const { user, setUser } = useAuth();
   const { cartItems } = useSelector((state) => state.cart);
   // console.log(cartItems.length);
   const openDialog = () => {
@@ -43,10 +43,10 @@ const LoginButton = () => {
 
   return (
     <BoxWraper>
-      { accountName ? (
+      { user ? (
         <LogoutProfile
-          accountName={accountName}
-          setAccountName={setAccountName}
+          accountName={user.firstName}
+          setAccountName={setUser}
         />
       ) : (
         <ButtonCss onClick={() => openDialog()}>Login</ButtonCss>

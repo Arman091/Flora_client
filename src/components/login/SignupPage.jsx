@@ -9,10 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useFcm } from "../../context/FcmProvider.jsx";
+import { useAuth } from "../../context/AuthProvider.jsx";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { parsePhoneNumber, formatPhoneNumber } from "react-phone-number-input";
-
+import { parsePhoneNumber} from "react-phone-number-input";
+import { useNavigate } from "react-router-dom";
 import FormInput from "../common/form-input";
 import PhoneInput from "../common/phone-number-input";
 import FormSelect from "../common/FormSelect";
@@ -20,6 +21,7 @@ import { signupSchema } from "../../validations/signupSchema.js";
 import FORM_KEYS from "../../constants/constants.js";
 import en from "../../locales/en.json";
 import { ALLOWED_COUNTRIES, DEFAULT_COUNTRY, LOGO } from "../../lib/config.js";
+import { signUp } from "../../service/profile.js";
 
 // Optional: extract signup copy from locales
 const t = en.signup;
@@ -29,11 +31,14 @@ const roleOptions = [
   { value: "regular", label: "Regular User" },
 ];
 
-export const SignupPage = () => {
+export const SignupPage = ({ open, setOpen }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
   const [submitSuccess, setSubmitSuccess] = useState(null);
-
+  const { token } = useFcm();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  
   const {
     control,
     handleSubmit,
@@ -49,33 +54,34 @@ export const SignupPage = () => {
     setIsSubmitting(true);
     setSubmitError(null);
     setSubmitSuccess(null);
-    console.log(values,"values")
+  
 
     const phoneNumber = values.phone ? parsePhoneNumber(values.phone) : undefined;
 
-    const dataToSend = {
+    const payload = {
       ...values,
       countryCode: phoneNumber?.country,
       countryCallingCode: phoneNumber?.countryCallingCode,
       formattedPhone: phoneNumber?.nationalNumber,
+      deviceToken: token || "",
     };
 
-    console.log(dataToSend,"dataToSend")
     try {
-      // Adjust URL to match your backend signup endpoint
-      const response = await axios.post("/signup", dataToSend);
+      const responseData = await signUp(payload);
+      const responseUser = responseData?.user || responseData?.data?.user || responseData?.data;
+      const responseToken = responseData?.accessToken || responseData?.data?.accessToken;
 
-      if (response?.status >= 200 && response?.status < 300) {
-        setSubmitSuccess(t?.success?.accountCreated || "Account created successfully.");
-        reset();
-      } else {
-        setSubmitError("Something went wrong. Please try again.");
-      }
+      login(responseUser, responseToken);
+      setSubmitSuccess(t?.success?.accountCreated || "Account created successfully.");
+      reset();
+      setOpen(false);
+      navigate("/user-dashboard");
     } catch (error) {
-      setSubmitError(
+      const message =
         error?.response?.data?.message ||
-          "Unable to create account. Please try again later."
-      );
+        error?.message ||
+        "Unable to create account. Please try again later.";
+      setSubmitError(message);
     } finally {
       setIsSubmitting(false);
     }
