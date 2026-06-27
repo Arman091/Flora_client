@@ -2,26 +2,25 @@ import Header from "./components/header/Header";
 import Home from "./components/home/Home";
 import { Box } from "@mui/material";
 import DataProvider from "./context/DataProvider";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route ,useNavigate} from "react-router-dom";
 import ProductDetail from "./components/details/ProductDetail";
 import Cart from "./components/cart/Cart";
+import {FcmProvider} from "./context/FcmProvider"
 import useFcmToken from "./firebase/useFcmToken";
-import { useEffect ,useState} from "react";
-const filePath='./firebase-messaging-sw.js'
+import { useEffect } from "react";
+
+
 function App() {
-  const { token, permissionStatus } = useFcmToken();
-  
+  const {deviceToken} = useFcmToken();
   useEffect(() => {
-    if(permissionStatus){
-    console.log(`Notification permission is ${permissionStatus}`);
+    if (deviceToken) {
+      console.log("deviceToken", deviceToken);
     }
-    else{
-     console.log(`Notification permission is Not Granted`);
-    }
-  }, [permissionStatus]);
+  }, [deviceToken]);
 
   return (
-    <DataProvider>
+    <FcmProvider>
+      <DataProvider>
         <Header />
         <Box style={{ marginTop: 55 }}>
           <Routes>
@@ -30,7 +29,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
           </Routes>
         </Box>
-    </DataProvider>
+     </DataProvider>
+    </FcmProvider>
   );
 }
 

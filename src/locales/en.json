@@ -1,0 +1,37 @@
+{
+    "signup": {
+      "title": "Sign up",
+      "subtitle": "Join FloralCart to start shopping and saving your favourites",
+      "labels": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "acceptTerms": "I agree to the Terms & Conditions and Privacy Policy",
+        "submit": "Sign Up",
+        "haveAccount": "Already have an account?",
+        "login": "Log In"
+      },
+      "placeholders": {
+        "firstName": "Enter your first name",
+        "lastName": "Enter your last name",
+        "email": "Enter your email address",
+        "phone": "Enter your phone number (e.g. +14155552671)",
+        "password": "Create a strong password",
+        "confirmPassword": "Re-enter your password"
+      },
+      "errors": {
+        "required": "This field is required",
+        "invalidEmail": "Invalid email format",
+        "invalidPhone": "Invalid phone number format",
+        "weakPassword": "Password must be at least 8 characters, contain one uppercase letter and one number",
+        "passwordsMismatch": "Passwords do not match",
+        "termsNotAccepted": "You must accept the terms to continue"
+      },
+      "success": {
+        "accountCreated": "Your account has been created successfully."
+      }
+    }
+  }

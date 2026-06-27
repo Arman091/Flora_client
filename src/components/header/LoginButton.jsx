@@ -3,12 +3,11 @@ import { Badge, Box, Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LoginDialog from "../login/Login";
-import { useState, useContext } from "react";
-import { DataContext } from "../../context/DataProvider";
+import { useState } from "react";
 import LogoutProfile from "./LogoutProfile";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useAuth } from "../../context/AuthProvider";
 const ButtonCss = styled(Button)`
   color:var(--color-text-primary);
   height: 32px;
@@ -34,7 +33,7 @@ const CartBox = styled(Link)`
 
 const LoginButton = () => {
   const [open, setOpen] = useState(false);
-  const { accountName, setAccountName } = useContext(DataContext);
+  const { user } = useAuth();
   const { cartItems } = useSelector((state) => state.cart);
   // console.log(cartItems.length);
   const openDialog = () => {
@@ -43,10 +42,9 @@ const LoginButton = () => {
 
   return (
     <BoxWraper>
-      { accountName ? (
+      { user ? (
         <LogoutProfile
-          accountName={accountName}
-          setAccountName={setAccountName}
+          user={user}
         />
       ) : (
         <ButtonCss onClick={() => openDialog()}>Login</ButtonCss>

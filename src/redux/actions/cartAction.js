@@ -1,7 +1,6 @@
 import axios from "axios";
 import { addToCart as add, removeFromCart as remove } from "../reducers/cartReducer";
-
-const URL = "https://floralcart.onrender.com";
+import { URL } from "../../lib/config";
 
 export const addToCart = (id, quantity) => async (dispatch) => {
   try {

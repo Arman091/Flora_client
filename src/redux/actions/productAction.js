@@ -8,7 +8,7 @@ import {
   getProductFail,
 } from "../reducers/productReducer";
 
-const URL = "https://floralcart.onrender.com";
+import { URL } from "../../lib/config";
 
 export const getAllProducts = () => async (dispatch) => {
   try {

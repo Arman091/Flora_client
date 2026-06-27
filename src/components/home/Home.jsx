@@ -19,17 +19,17 @@ const Home = () => {
 
   return (
     <>
-      {loading ? <Loader /> :
       <Box>
-        <Banner />
+      <Banner />
+       {loading ? <Loader /> :
         <ProductComponent
           products={products}
           title="Products"
           timer={true}
         />
+        }
         <BannerMiddle />
       </Box>
-      }
     </>
   );
 };
