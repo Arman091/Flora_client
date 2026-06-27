@@ -7,9 +7,17 @@ import ProductDetail from "./components/details/ProductDetail";
 import Cart from "./components/cart/Cart";
 import {FcmProvider} from "./context/FcmProvider"
 import useFcmToken from "./firebase/useFcmToken";
+import { useEffect } from "react";
 
 
 function App() {
+  const {deviceToken} = useFcmToken();
+  useEffect(() => {
+    if (deviceToken) {
+      console.log("deviceToken", deviceToken);
+    }
+  }, [deviceToken]);
+
   return (
     <FcmProvider>
       <DataProvider>
