@@ -7,6 +7,7 @@ import ProductDetail from "./components/details/ProductDetail";
 import Cart from "./components/cart/Cart";
 import {FcmProvider} from "./context/FcmProvider"
 import useFcmToken from "./firebase/useFcmToken";
+import { HOME, PRODUCT_DETAIL, CART } from "./constants/routes";
 import { useEffect } from "react";
 
 
@@ -24,9 +25,9 @@ function App() {
         <Header />
         <Box style={{ marginTop: 55 }}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path={HOME} element={<Home />} />
+            <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
+            <Route path={CART} element={<Cart />} />
           </Routes>
         </Box>
      </DataProvider>

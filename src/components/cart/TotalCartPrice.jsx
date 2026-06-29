@@ -2,6 +2,7 @@ import { Box, styled, Typography, Button } from "@mui/material";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ORDER_CONFIRMATION } from "../../constants/routes";
 const RightHeader = styled(Box)`
   padding: 20px 25px;
   text-align: center;
@@ -40,7 +41,7 @@ const TotalCartPrice = ({ cartItems }) => {
 
   const confirmed = () => {
     alert(`Congratulation... Your order is placed`);
-    navigate("/orderConfirmation");
+    navigate(ORDER_CONFIRMATION);
   };
 
   const totalAmount = () => {

@@ -8,6 +8,7 @@ import LogoutProfile from "./LogoutProfile";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../context/AuthProvider";
+import { CART } from "../../constants/routes";
 const ButtonCss = styled(Button)`
   color:var(--color-text-primary);
   height: 32px;
@@ -49,7 +50,7 @@ const LoginButton = () => {
       ) : (
         <ButtonCss onClick={() => openDialog()}>Login</ButtonCss>
       )}
-      <CartBox to="/cart">
+      <CartBox to={CART}>
         <Badge badgeContent={cartItems?.length} color="secondary">
           <ShoppingCartIcon />
         </Badge>

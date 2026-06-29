@@ -5,6 +5,7 @@ import LoginButton from "./LoginButton";
 import { Link } from "react-router-dom";
 import './Header.css'
 import { LOGO } from "../../lib/config";
+import { HOME } from "../../constants/routes";
 const StyledHeader = styled(AppBar)`
   
   
@@ -20,7 +21,7 @@ const Header = () => {
     <div>
       <StyledHeader style={{ 'backgroundColor': "var(--background-primary)"}} >
         <Toolbar className="mytoolbar">
-          <Link to="/">
+          <Link to={HOME}>
            <div className="logo_container">
             <img
               src={LOGO}

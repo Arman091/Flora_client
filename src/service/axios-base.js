@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { URL } from '../lib/config';
+import { LOGIN } from '../constants/routes';
 
 // Variables to manage the refresh state
 let isRefreshing = false;
@@ -66,7 +67,7 @@ axiosInstance.interceptors.response.use(
         if (!refreshToken) {
           localStorage.removeItem('accessToken');
           if (typeof window !== 'undefined') {
-            window.location.href = '/login';
+            window.location.href = LOGIN;
           }
           return Promise.reject(new Error('No refresh token available'));
         }
@@ -89,7 +90,7 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+          window.location.href = LOGIN;
         }
         return Promise.reject(refreshError);
       } finally {

@@ -22,6 +22,7 @@ import FORM_KEYS from "../../constants/constants.js";
 import en from "../../locales/en.json";
 import { ALLOWED_COUNTRIES, DEFAULT_COUNTRY, LOGO } from "../../lib/config.js";
 import { signUp } from "../../service/profile.js";
+import { USER_DASHBOARD } from "../../constants/routes";
 
 // Optional: extract signup copy from locales
 const t = en.signup;
@@ -76,7 +77,7 @@ export const SignupPage = ({ setOpen }) => {
       setSubmitSuccess(t?.success?.accountCreated || "Account created successfully.");
       reset();
       setOpen(false);
-      navigate("/user-dashboard");
+      navigate(USER_DASHBOARD);
     } catch (error) {
       const message =
         error?.response?.data?.message ||
