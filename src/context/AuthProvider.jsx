@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
+import { URL } from "../lib/config";
 
 const AuthContext = createContext(null);
 
@@ -12,9 +13,14 @@ export const AuthProvider = ({ children }) => {
     () => localStorage.getItem("accessToken") || ""
   );
 
-  const login = (userData, token) => {
+  const [refreshToken, setRefreshTokenState] = useState(
+    () => localStorage.getItem("refreshToken") || ""
+  );
+
+  const login = (userData, token, refToken) => {
     setUser(userData || null);
     setAccessTokenState(token || "");
+    setRefreshTokenState(refToken || "");
 
     if (userData) {
       localStorage.setItem("authUser", JSON.stringify(userData));
@@ -27,24 +33,43 @@ export const AuthProvider = ({ children }) => {
     } else {
       localStorage.removeItem("accessToken");
     }
+
+    if (refToken) {
+      localStorage.setItem("refreshToken", refToken);
+    } else {
+      localStorage.removeItem("refreshToken");
+    }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const refToken = localStorage.getItem("refreshToken");
+    try {
+      await fetch(`${URL}/auth/logout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken: refToken }),
+      });
+    } catch {
+      // best-effort: proceed with local cleanup even if the request fails
+    }
     setUser(null);
     setAccessTokenState("");
+    setRefreshTokenState("");
     localStorage.removeItem("authUser");
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   const value = useMemo(
     () => ({
       user,
       accessToken,
+      refreshToken,
       login,
       logout,
       isAuthenticated: Boolean(accessToken),
     }),
-    [user, accessToken]
+    [user, accessToken, refreshToken]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -57,4 +82,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

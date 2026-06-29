@@ -2,6 +2,7 @@ import { Box, styled, Typography } from "@mui/material";
 import React from "react";
 import './cart.css'
 import { useNavigate } from "react-router-dom";
+import { HOME } from "../../constants/routes";
 const MainBox = styled(Box)`
 height: 65vh;
 width: 80%;
@@ -19,7 +20,7 @@ margin-top: 140px;
 const CartEmpty = () => {
   const navigate=useNavigate()
   const additemHandler = () => {
-     navigate('/')
+     navigate(HOME)
   }
 
   return (

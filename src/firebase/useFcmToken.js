@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { onMessage } from 'firebase/messaging';
 import { fetchFCMToken, messaging } from './firebase';
 import { useNavigate } from "react-router-dom";
+import { HOME } from "../constants/routes";
 const useFcmToken = () => {
   const navigate = useNavigate();
 
@@ -99,7 +100,7 @@ const useFcmToken = () => {
         if (Notification.permission !== 'granted') return;
 
         const link =
-          payload?.fcmOptions?.link || payload?.data?.link || '/';
+          payload?.fcmOptions?.link || payload?.data?.link || HOME;
 
         const title = payload?.notification?.title || 'New Notification';
         const body = payload?.notification?.body || 'You have a new message';

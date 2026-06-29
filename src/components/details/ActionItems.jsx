@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartAction";
 import { useState } from "react";
+import { CART } from "../../constants/routes";
 const DetailLeftBox = styled(Box)`
   min-width: 40%;
   padding: 40px 0 0 80px;
@@ -28,7 +29,7 @@ const ActionItems = ({ product }) => {
 
   const addItemToCart = () => {
     dispatch(addToCart(id, quantity));
-    navigate("/cart");
+    navigate(CART);
   };
 
   return (
