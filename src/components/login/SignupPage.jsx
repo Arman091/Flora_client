@@ -70,8 +70,9 @@ export const SignupPage = ({ setOpen }) => {
       const responseData = await signUp(payload);
       const responseUser = responseData?.user || responseData?.data?.user || responseData?.data;
       const responseToken = responseData?.accessToken || responseData?.data?.accessToken;
+      const responseRefreshToken = responseData?.refreshToken || responseData?.data?.refreshToken;
 
-      login(responseUser, responseToken);
+      login(responseUser, responseToken, responseRefreshToken);
       setSubmitSuccess(t?.success?.accountCreated || "Account created successfully.");
       reset();
       setOpen(false);
@@ -265,8 +266,3 @@ export const SignupPage = ({ setOpen }) => {
 
 export default SignupPage;
 
-// Example of code-splitting with React.lazy (to be used where you register routes):
-// const SignupPage = React.lazy(() => import("./components/login/SignupPage"));
-// <Suspense fallback={<div>Loading...</div>}>
-//   <SignupPage />
-// </Suspense>

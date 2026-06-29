@@ -108,8 +108,10 @@ const LoginDialog = ({ open, setOpen }) => {
         responseData?.user || responseData?.data?.user || responseData?.data;
       const responseToken =
         responseData?.accessToken || responseData?.data?.accessToken;
+      const responseRefreshToken =
+        responseData?.refreshToken || responseData?.data?.refreshToken;
 
-      setAuthLogin(responseUser, responseToken);
+      setAuthLogin(responseUser, responseToken, responseRefreshToken);
       setError(false);
       handleClose();
     } catch (err) {

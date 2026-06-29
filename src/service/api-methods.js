@@ -2,8 +2,6 @@ import axiosInstance from "./axios-base";
 
 const commonHeaders = {
   "Content-Type": "application/json",
-  language: "en",
-  platform: "3",
 };
 
 const request = async (method, url, { data, params, headers = {}, signal } = {}) => {
