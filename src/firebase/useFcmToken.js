@@ -25,9 +25,6 @@ const useFcmToken = () => {
 
     // If already granted
     if (Notification.permission === 'granted') {
-      if ('serviceWorker' in navigator) {
-        await navigator.serviceWorker.ready;
-      }
       return await fetchFCMToken();
     }
 
@@ -36,9 +33,6 @@ const useFcmToken = () => {
       const permission = await Notification.requestPermission();
 
       if (permission === 'granted') {
-        if ('serviceWorker' in navigator) {
-          await navigator.serviceWorker.ready;
-        }
         return await fetchFCMToken();
       }
     }
@@ -73,7 +67,6 @@ const useFcmToken = () => {
       loading.current = false;
       return;
     }
-
     // Success
     setPermissionStatus(Notification.permission);
     setToken(newToken);

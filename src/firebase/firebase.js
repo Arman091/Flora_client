@@ -26,14 +26,14 @@ const messaging = async () => {
 
 export const fetchFCMToken = async () => {
   try {
-     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
       console.log("Push messaging is not supported in this browser");
       return null;
     }
     const fcmMessaging = await messaging();
     const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
     await navigator.serviceWorker.ready;
-    if (fcmMessaging && registration &&  registration.pushManager) {
+    if (fcmMessaging && registration && registration.pushManager) {
       const vapidKey = process.env.REACT_APP_FIREBASE_VAPID_PUBLIC_KEY;
       if (!vapidKey) {
         console.error('Firebase VAPID key is not configured');
