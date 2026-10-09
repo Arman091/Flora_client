@@ -1,0 +1,57 @@
+/* Styles for react-phone-number-input internal elements.
+   Tailwind cannot target library child classes, so these live here.
+   Uses design tokens from src/index.css — edit tokens there, not values. */
+
+.phone-input-wrapper .PhoneInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 100%;
+}
+
+.phone-input-wrapper--error .PhoneInput {
+  --border-primary: var(--color-error);
+}
+
+.PhoneInput--disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.phone-input-wrapper .PhoneInputCountry {
+  background-color: transparent;
+  padding: 0 8px;
+  min-height: var(--field-height);
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--border-primary);
+}
+
+.phone-input-wrapper .PhoneInputCountryIcon {
+  width: 24px;
+  height: 18px;
+  box-shadow: 0 0 0 1px var(--PhoneInputCountryFlag-borderColor);
+  border-radius: 2px;
+}
+
+.phone-input-wrapper .PhoneInputCountrySelectArrow {
+  color: var(--PhoneInputCountrySelectArrow-color);
+  opacity: var(--PhoneInputCountrySelectArrow-opacity, 0.5);
+  margin-left: 12px;
+}
+
+.phone-input-wrapper .PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 8px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  height: 100%;
+  box-sizing: border-box;
+}

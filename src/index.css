@@ -31,6 +31,7 @@
   --loader-color: #FFB7CE;
   --text-aqua-primary: #005fb890; /* referenced by scrollbar hover, was undefined */
   --field-height: 40px;
+  --radius-md: 4px; /* field/control corners (matches Tailwind rounded-md) */
 }
 
 

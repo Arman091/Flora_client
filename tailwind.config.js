@@ -21,6 +21,9 @@ module.exports = {
       height: {
         field: "var(--field-height)",
       },
+      borderRadius: {
+        md: "var(--radius-md)",
+      },
     },
     // Match MUI breakpoints so max-* variants align with legacy styles
     screens: {
