@@ -48,6 +48,8 @@
   /* brand */
   --color-brand: #51875f;
   --color-brand-hover: #6ba99a;
+  --color-badge: #9c27b0; /* MUI secondary — cart badge */
+  --color-hover-overlay: rgba(0, 0, 0, 0.04); /* MUI MenuItem hover */
   /* misc */
   --loader-color: #FFB7CE;
   --text-aqua-primary: #005fb890; /* referenced by scrollbar hover, was undefined */

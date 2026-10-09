@@ -29,6 +29,8 @@ module.exports = {
         success: "var(--color-success)",
         brand: "var(--color-brand)",
         "brand-hover": "var(--color-brand-hover)",
+        badge: "var(--color-badge)",
+        "hover-overlay": "var(--color-hover-overlay)",
         "deal-band": "var(--color-deal-band)",
         "carousel-bg": "var(--color-carousel-bg)",
         "product-card": "var(--color-product-card)",
