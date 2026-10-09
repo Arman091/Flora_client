@@ -22,7 +22,16 @@
   --background-primary: #ffffff;
   /* borders */
   --border-primary: #0000003B; /* rgba(0,0,0,0.23) — was broken with quotes */
+  --border-divider: #0000001f; /* MUI default divider color */
   --color-focus: #1976d2;
+  /* home / product listing */
+  --color-deal-band: #FEFFEC;
+  --color-carousel-bg: #FEFEEC;
+  --color-product-card: #fbf5e4;
+  --color-product-card-hover: #FEFEEC;
+  --color-product-title: #33b8a9;
+  --color-blue: blue;
+  --color-timer: #7f7f7f;
   /* status */
   --color-error: #d32f2f;
   --color-success: #008000; /* CSS `green` keyword */

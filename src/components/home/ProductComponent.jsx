@@ -1,58 +1,9 @@
 import React from "react";
 
 import "react-multi-carousel/lib/styles.css";
-import { Box, Button, styled, Divider, Typography, Grid } from "@mui/material";
 import Countdown from "react-countdown";
 import { Link } from "react-router-dom";
-
-
-
-const Products = styled(Box)`
-  margin-top: 10px;
-  color:black;
-  
-`;
-
-const DealOfTheDayAndTimer = styled(Box)`
-  padding: 15px 20px;
-  display: flex;
-  background-color:#FEFFEC;
-  height:80px;
-  align-items: center;
-  font-family: cursive;
-`;
-
-const Timer = styled(Box)`
-  display: flex;
-  align-items: center;
-  color: #7f7f7f;
-`;
-
-const DealOfTheDay = styled(Typography)`
-  font-size: 22px;
-  font-weight: 500;
-  margin-right: 25px;
-  line-height: 34px;
-  font-family: cursive;
-`;
-
-const ViewAllButton = styled(Button)`
-  margin-left: auto;
-  background-color: blue;
-  border-radius: 3px;
-  font-size: 12px;
-  font-weight: 500;
-`;
-
-const Image = styled("img")`
-  height: 250px;
-  width: "auto";
-`;
-
-const Text = styled(Typography)`
-  font-size: 14px;
-  margin-top: 6px;
-`;
+import Button from "../common/button";
 
 const ProductComponent = ({ products, title, timer }) => {
   const countdown_URL =
@@ -60,52 +11,58 @@ const ProductComponent = ({ products, title, timer }) => {
 
   const renderer = ({ hours, minutes, seconds }) => {
     return (
-      <Box variant="span" style={{color:"#51875f", 'fontSize':"1.2em"}}>
+      <span className="text-[1.2em] text-brand">
         {hours}:{minutes}:{seconds} OFFER ENDS IN
-      </Box>
+      </span>
     );
   };
 
   return (
-    
-    <Products >
-
-      <DealOfTheDayAndTimer>
-          <DealOfTheDay>{title}</DealOfTheDay>
+    <div className="mt-2.5 text-black">
+      <div className="flex h-20 items-center bg-deal-band p-[15px_20px] font-[cursive]">
+        <p className="mr-[25px] text-[22px] font-medium leading-[34px]">
+          {title}
+        </p>
         {timer && (
-          <Timer>
+          <div className="flex items-center text-timer">
             <img
               src={countdown_URL}
               alt="timer"
-              style={{ width: 25, paddingRight: 10 }}
-              />
+              className="w-[25px] pr-2.5"
+            />
             <Countdown date={Date.now() + 12788734} renderer={renderer} />
-          </Timer>
+          </div>
         )}
-        <ViewAllButton variant="contained"> View All</ViewAllButton>
-      </DealOfTheDayAndTimer>
-      <Divider />
-        
-        
-      <Grid container spacing={"2px"} bgcolor="white" m={"auto"} p={2} width={"95%"}>
+        <Button className="ml-auto rounded-[3px] bg-blue text-xs font-medium">
+          View All
+        </Button>
+      </div>
+      <hr className="border-divider" />
+
+      <div className="mx-auto flex w-[95%] flex-wrap gap-[2px] bg-white p-2">
         {products.map((product) => (
-            <Grid item bgcolor='#fbf5e4' md={3.97} xs={12} m={0.2} className="mygrid" key={product.id}>
+          <div
+            className="w-full bg-product-card hover:bg-product-card-hover md:w-[calc(33.333%-2px)]"
+            key={product.id}
+          >
             <Link to={`product/${product.id}`}>
-              <Box textAlign="center" style={{ padding: "25px 15px" }}>
-                <Image src={product.url} alt="product" className="productpic" />
-                <Text style={{ fontWeight: 600, color: "#33b8a9", 'fontFamily': "cursive" }}>
+              <div className="p-[25px_15px] text-center">
+                <img
+                  src={product.url}
+                  alt="product"
+                  className="h-[250px] w-[350px]"
+                />
+                <p className="mt-1.5 text-sm font-semibold text-product-title font-[cursive]">
                   {product.title.shortTitle}
-                </Text>
-                <Text style={{ color: "black" }}>{product.discount}</Text>
-                <Text style={{ color: "#51875f" }}>{product.tagline}</Text>
-              </Box>
+                </p>
+                <p className="mt-1.5 text-sm text-black">{product.discount}</p>
+                <p className="mt-1.5 text-sm text-brand">{product.tagline}</p>
+              </div>
             </Link>
-            </Grid>
-          ))}
-        </Grid>
-      </Products>
-    
-    
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
