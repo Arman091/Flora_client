@@ -1,6 +1,5 @@
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
-import { Box } from "@mui/material";
 import DataProvider from "./context/DataProvider";
 import { Routes, Route ,useNavigate} from "react-router-dom";
 import ProductDetail from "./components/details/ProductDetail";
@@ -23,13 +22,13 @@ function App() {
     <FcmProvider>
       <DataProvider>
         <Header />
-        <Box style={{ marginTop: 55 }}>
+        <div className="mt-[55px]">
           <Routes>
             <Route path={HOME} element={<Home />} />
             <Route path={PRODUCT_DETAIL} element={<ProductDetail />} />
             <Route path={CART} element={<Cart />} />
           </Routes>
-        </Box>
+        </div>
      </DataProvider>
     </FcmProvider>
   );

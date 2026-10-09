@@ -5,7 +5,7 @@
 - React 18 (Create React App via `react-scripts`) — **not** Vite, not Next.js
 - Pure JavaScript (no TypeScript)
 - Redux Toolkit + React Redux
-- Material UI v5
+- Tailwind CSS v3.4 (styling; Headless UI for Menu/Dialog, lucide-react for icons)
 - React Router v6
 - React Hook Form + Zod
 - Axios with JWT auth + refresh-token interceptor
@@ -85,3 +85,9 @@ Config is **inline in `package.json`** under `"eslintConfig"` — there is no `.
 - No TypeScript — all files are `.js` / `.jsx` / `.css`
 - `Array.map()` callbacks often omit `return` (ESLint `array-callback-return` is off)
 - Component files are PascalCase, utility/config files are kebab-case or camelCase
+
+### Styling (Tailwind)
+
+- Design tokens live in `:root` in `src/index.css` and map to classes in `tailwind.config.js`; always use the semantic class (e.g. `text-text-primary`, `bg-brand`) — never hardcode colors. Add a token to both files first if one is missing.
+- Breakpoints in `tailwind.config.js` match MUI thresholds (sm=600, md=900, lg=1200); use `max-sm:`/`max-md:` for mobile-first-inverse variants.
+- Shared shadcn-style `Button` with variants/sizes: `src/components/common/button.jsx`.

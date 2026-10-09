@@ -1,28 +1,15 @@
-import { InputBase, styled, Box } from "@mui/material";
 import { Search as SearchIcon } from "lucide-react";
 import React from "react";
 
-const SearchBarCSS = styled(Box)`
-  background: #fff;
-  width: 25%;
-  height: 30px;
-  margin-left: 23px;
-  border-radius: 3px;
-  display: flex;
-`;
-const InputCSS = styled(InputBase)`
-  padding-left: 15px;
-  width: 100%; ;
-`;
-
 const Search = () => {
   return (
-    <SearchBarCSS>
-      <InputCSS placeholder="Search Items" />
-      <Box>
-        <SearchIcon size={24} className="text-[blue] p-[5px]" />
-      </Box>
-    </SearchBarCSS>
+    <div className="ml-[23px] flex h-[30px] w-1/4 rounded-[3px] bg-white">
+      <input
+        placeholder="Search Items"
+        className="h-full w-full border-0 bg-transparent pl-[15px] outline-none"
+      />
+      <SearchIcon size={24} className="p-[5px] text-blue" />
+    </div>
   );
 };
 export default Search;
