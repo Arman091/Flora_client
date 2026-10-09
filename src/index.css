@@ -23,6 +23,7 @@
   /* borders */
   --border-primary: #0000003B; /* rgba(0,0,0,0.23) — was broken with quotes */
   --border-divider: #0000001f; /* MUI default divider color */
+  --border-product-image: #f0f0f0;
   --color-focus: #1976d2;
   /* home / product listing */
   --color-deal-band: #FEFFEC;

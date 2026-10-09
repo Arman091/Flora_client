@@ -3,28 +3,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductDetail } from "../../redux/actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
-import { Box } from "@mui/system";
-import { Grid, styled } from "@mui/material";
 import ActionItems from "./ActionItems";
 import ProductDetails2 from "./ProductDetails2";
-
-const Component = styled(Box)`
-   background-color: #FEFFEC;
-   margin:auto;
-  margin-top: 120px;
-  width:95%;
-`;
-
-const Container = styled(Grid)`
-  background-color: white;
-  display: flex;
-  height:500px
-`;
-
-const RightContainer = styled(Grid)`
-  margin-top: 50px;
-  margin-left: 50px;
-`;
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -36,18 +16,18 @@ const ProductDetail = () => {
   }, [dispatch, product, loading]);
 
   return (
-    <Component>
+    <div className="mx-auto mt-[120px] w-[95%] bg-deal-band">
       {product && Object.keys(product).length && (
-        <Container container>
-          <Grid item lg={4} md={4} sm={8} xs={12}>
+        <div className="flex h-[500px] flex-wrap bg-white">
+          <div className="w-full sm:w-2/3 md:w-1/3">
             <ActionItems product={product} />
-          </Grid>
-          <RightContainer item lg={4} md={4} sm={8} xs={12}>
+          </div>
+          <div className="mt-[50px] ml-[50px] w-full sm:w-2/3 md:w-1/3">
             <ProductDetails2 product={product} />
-          </RightContainer>
-        </Container>
+          </div>
+        </div>
       )}
-    </Component>
+    </div>
   );
 };
 

@@ -1,25 +1,11 @@
-import { Box, Button, styled } from "@mui/material";
 import { ShoppingCart, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartAction";
 import { useState } from "react";
 import { CART } from "../../constants/routes";
-const DetailLeftBox = styled(Box)`
-  min-width: 40%;
-  padding: 40px 0 0 80px;
-`;
+import Button from "../common/button";
 
-const Image = styled("img")`
-  padding: 15px;
-`;
-
-const ButtonCSS = styled(Button)`
-  width: 45%;
-  height: 45px;
-  border-radius: 5px;
-`;
-    
 const ActionItems = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,29 +18,25 @@ const ActionItems = ({ product }) => {
   };
 
   return (
-    <DetailLeftBox>
-      <Box
-        style={{
-          padding: "15 20",
-          border: "1px solid #f0f0f0",
-          width: "90%",
-          height: "80%",
-        }}
-      >
-        <Image src={product.detailUrl} alt="img" width="90%" height="80%" />
-      </Box>
-      <ButtonCSS
+    <div className="min-w-[40%] pt-10 pl-20">
+      <div className="h-[80%] w-[90%] border border-product-image mb-8">
+        <img
+          src={product.detailUrl}
+          alt="img"
+          className=" md:h-[300px] w-full  p-[15px]"
+        />
+      </div>
+      <Button
         onClick={() => addItemToCart()}
-        variant="contained"
-        style={{ marginRight: 10, background: "#51875f" }}
+        className="mr-2.5 h-[45px] w-[45%] rounded-[5px]"
       >
         <ShoppingCart />
         Add To Bag
-      </ButtonCSS>
-      <ButtonCSS variant="contained" style={{ background: "#51875f" }}>
+      </Button>
+      <Button className="h-[45px] w-[45%] rounded-[5px]">
         <Zap size={24} /> Buy it Now
-      </ButtonCSS>
-    </DetailLeftBox>
+      </Button>
+    </div>
   );
 };
 

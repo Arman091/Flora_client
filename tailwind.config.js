@@ -17,6 +17,7 @@ module.exports = {
         "header-bg": "var(--color-header-bg)",
         "border-primary": "var(--border-primary)",
         divider: "var(--border-divider)",
+        "product-image": "var(--border-product-image)",
         focus: "var(--color-focus)",
         error: "var(--color-error)",
         success: "var(--color-success)",
