@@ -8,7 +8,7 @@
 * Redux-Thunk
 * Canva 
 * Logo Design
-* Material UI
+* Tailwind Css
 * Color Palette
 
 #### This is Client side Code For Hosting Purpose We Have to Put Code in Diffrent Repos 
