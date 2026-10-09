@@ -1,7 +1,7 @@
 import React from "react";
 import { Badge, Box, Button, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCart as ShoppingCartIcon } from "lucide-react";
 import LoginDialog from "../login/Login";
 import { useState } from "react";
 import LogoutProfile from "./LogoutProfile";

@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box, styled } from "@mui/material";
-import DiscountIcon from "@mui/icons-material/Discount";
+import { BadgePercent } from "lucide-react";
 
 const OffersBox = styled(Box)`
   font-size: 14px;
@@ -10,11 +10,9 @@ const OffersBox = styled(Box)`
   }
 `;
 
-const DiscountIconCSS = styled(DiscountIcon)`
-  margin-right: 5px;
-  color: green;
-  font-size: 12px;
-`;
+const DiscountIcon = () => (
+  <BadgePercent size={12} className="mr-[5px] text-[green]" />
+);
 
 const ProductDetails2 = ({ product }) => {
   return (
@@ -37,17 +35,17 @@ const ProductDetails2 = ({ product }) => {
       <Typography>Available Offers</Typography>
       <OffersBox>
         <Typography>
-          <DiscountIconCSS /> Get extra 20% off upto ₹200 on 2 items T&C
+          <DiscountIcon /> Get extra 20% off upto ₹200 on 2 items T&C
         </Typography>
         <Typography>
-          <DiscountIconCSS />
+          <DiscountIcon />
           Get extra 10% off on SBI credit card T&C
         </Typography>
         <Typography>
-          <DiscountIconCSS /> 20% off upto ₹1000 on HDFC card T&C
+          <DiscountIcon /> 20% off upto ₹1000 on HDFC card T&C
         </Typography>
         <Typography>
-          <DiscountIconCSS />
+          <DiscountIcon />
           Buy 2 items and save 5% extra T&C
         </Typography>
       </OffersBox>
