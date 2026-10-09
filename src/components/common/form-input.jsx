@@ -1,6 +1,5 @@
 // src/components/common/FormInput.jsx
-import React from "react";
-import TextField from "@mui/material/TextField";
+import React, { useId } from "react";
 import { Controller } from "react-hook-form";
 
 const FormInput = ({
@@ -9,24 +8,47 @@ const FormInput = ({
   label,
   error,
   defaultValue = "",
-  ...textFieldProps
+  placeholder = "",
+  ...inputProps
 }) => {
+  const inputId = useId();
+  const errorId = `${inputId}-error`;
+
   return (
     <Controller
       name={name}
       control={control}
       defaultValue={defaultValue}
       render={({ field }) => (
-        <TextField
-          {...field}
-          fullWidth
-          label={label}
-          error={!!error}
-          helperText={error?.message || ""}
-          variant="outlined"
-          size="small"
-          {...textFieldProps}
-        />
+        <div className="relative w-full">
+         <label
+            htmlFor={inputId}
+            className="text-text-label text-sm "
+          >
+            {label}
+          </label>
+          <input
+            {...field}
+            {...inputProps}
+            id={inputId}
+            placeholder={placeholder || " "}
+            aria-invalid={!!error}
+            aria-describedby={error ? errorId : undefined}
+            className={`peer h-field w-full rounded border bg-white px-2.5 pb-1.5 pt-2 text-sm text-text-primary outline-none transition-colors ${
+              error
+                ? "border-error focus:border-error"
+                : "border-border-primary focus:border-focus"
+            }`}
+          />
+          {error && (
+            <p
+              id={errorId}
+              className="mt-1 ml-1.5 text-xs font-semibold text-error"
+            >
+              {error.message}
+            </p>
+          )}
+        </div>
       )}
     />
   );

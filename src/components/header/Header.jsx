@@ -1,60 +1,29 @@
 import React from "react";
-import { AppBar, Toolbar, styled, Box } from "@mui/material";
 import Search from "./Search";
 import LoginButton from "./LoginButton";
 import { Link } from "react-router-dom";
-import './Header.css'
 import { LOGO } from "../../lib/config";
 import { HOME } from "../../constants/routes";
-const StyledHeader = styled(AppBar)`
-  
-  
-  height: 90px;
-`;
 
-const CustomWraper = styled(Box)`
-  width: 50%;
-  display: flex;
-`;
 const Header = () => {
   return (
-    <div>
-      <StyledHeader style={{ 'backgroundColor': "var(--background-primary)"}} >
-        <Toolbar className="mytoolbar">
-          <Link to={HOME}>
-           <div className="logo_container">
+    <header className="fixed left-0 right-0 top-0 z-[1100] h-[90px] bg-bg-primary">
+      <div className="mr-[10%] flex h-full items-center justify-between">
+        <Link to={HOME}>
+          <div className="ml-[30px] flex h-[75px] w-[251px] items-center justify-center">
             <img
               src={LOGO}
               alt="logo"
-               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain', // scales logo to fit container
-                scale:'1',
-                marginTop:'16px'
-              }}
-              />
-            </div>
-          </Link>
-          {/* <Search />   */}
-          <CustomWraper>
-            <LoginButton />
-          </CustomWraper>
-        </Toolbar>
-      </StyledHeader>
-       <style>
-        {`
-          .logo_container {
-            height: 75px;
-            width: 251px;
-            margin-left: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        `}
-      </style>
-    </div>
+              className="mt-4 h-full w-full object-contain"
+            />
+          </div>
+        </Link>
+        {/* <Search />   */}
+        <div className="flex w-1/2">
+          <LoginButton />
+        </div>
+      </div>
+    </header>
   );
 };
 

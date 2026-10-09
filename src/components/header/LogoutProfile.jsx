@@ -1,62 +1,36 @@
-import { Typography, Box, MenuItem, MenuList, Paper, Popper, styled } from "@mui/material";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import React from "react";
-import { useState, useRef } from "react";
-import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthProvider";
-import { useClickOutside } from "../../shared/helpers";
-
-const Dropdown = styled(Paper)`
-  margin-top: 5px;
-  z-index: 1500;
-`;
-
-const Signout = styled(Typography)`
-  font-size: 14px;
-  margin-right:12px;
-`;
-
-const SignoutIcon = styled(PowerSettingsNewIcon)`
-  color: var(--color-text-primary);
-`;
 
 const LogoutProfile = ({ user }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const { logout } = useAuth();
-  const ref = useRef(null);
-
-  useClickOutside(ref, () => setAnchorEl(null));
-
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   return (
-    <Box ref={ref}>
-      <Typography 
-        onClick={handleClick}
-        style={{ marginTop: 3, cursor:"pointer", color: "var(--color-text-primary)", marginRight: 18 }}>
-        {user?.firstName || user?.name }
-      </Typography>
-      <Popper open={Boolean(anchorEl)} anchorEl={anchorEl} placement="bottom-start" sx={{ zIndex: 1500 }} disablePortal>
-        <Dropdown>
-          <MenuList>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                logout();
-              }}
+    <Menu as="div" className="relative mr-[18px] text-left">
+      <MenuButton className="mt-[3px] cursor-pointer text-text-primary">
+        {user?.firstName || user?.name}
+      </MenuButton>
+      <MenuItems className="absolute left-0 z-[1300] mt-[5px] w-40 origin-top-left rounded-md border border-divider bg-white py-1 shadow-lg focus:outline-none">
+        <MenuItem>
+          {({ focus }) => (
+            <button
+              type="button"
+              onClick={logout}
+              className={`flex w-full items-center gap-2 px-4 py-1.5 text-left text-sm text-text-primary ${
+                focus ? "bg-hover-overlay" : ""
+              }`}
             >
-              <SignoutIcon  className="myicon"/>
-              <Signout>Sign Out</Signout>
-            </MenuItem>
-          </MenuList>
-        </Dropdown>
-      </Popper>
-    </Box>
+              <LogOut
+                size={24}
+                style={{ color: "var(--color-text-primary)" }}
+              />
+              <span className="mr-3 text-sm">Sign Out</span>
+            </button>
+          )}
+        </MenuItem>
+      </MenuItems>
+    </Menu>
   );
 };
 

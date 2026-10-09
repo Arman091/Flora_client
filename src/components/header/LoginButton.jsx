@@ -1,7 +1,5 @@
 import React from "react";
-import { Badge, Box, Button, Typography } from "@mui/material";
-import styled from "@emotion/styled";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { ShoppingCart as ShoppingCartIcon } from "lucide-react";
 import LoginDialog from "../login/Login";
 import { useState } from "react";
 import LogoutProfile from "./LogoutProfile";
@@ -9,55 +7,45 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../context/AuthProvider";
 import { CART } from "../../constants/routes";
-const ButtonCss = styled(Button)`
-  color:var(--color-text-primary);
-  height: 32px;
-  font-size: 15px;
-  text-transform: none;
-`;
-
-const BoxWraper = styled(Box)`
-  display: flex;
-  margin: 24px 3% 0 auto;
-  & > Button,
-  & > p {
-    margin-right: 40px;
-  }
-`;
-
-const CartBox = styled(Link)`
-  display: flex;
-  text-decoration: none;
-  color: var(--color-text-primary);
-  padding-top:5px
-`;
+import Button from "../common/button";
 
 const LoginButton = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const { cartItems } = useSelector((state) => state.cart);
-  // console.log(cartItems.length);
   const openDialog = () => {
     setOpen(true);
   };
 
   return (
-    <BoxWraper>
-      { user ? (
-        <LogoutProfile
-          user={user}
-        />
+    <div className="ml-auto mt-6 mr-[3%] flex">
+      {user ? (
+        <LogoutProfile user={user} />
       ) : (
-        <ButtonCss onClick={() => openDialog()}>Login</ButtonCss>
+        <Button
+          variant="ghost"
+          onClick={() => openDialog()}
+          className="mr-10 h-8 text-[15px]"
+        >
+          Login
+        </Button>
       )}
-      <CartBox to={CART}>
-        <Badge badgeContent={cartItems?.length} color="secondary">
+      <Link
+        to={CART}
+        className="flex pt-[5px] text-text-primary no-underline"
+      >
+        <span className="relative">
           <ShoppingCartIcon />
-        </Badge>
-        <Typography style={{marginLeft: 10}}>Cart</Typography>
-      </CartBox>
-      <LoginDialog open={open} setOpen={setOpen}  />
-    </BoxWraper>
+          {cartItems?.length > 0 && (
+            <span className="absolute top-0 right-0 flex h-5 min-w-[20px] translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-badge px-1.5 text-xs text-white">
+              {cartItems?.length}
+            </span>
+          )}
+        </span>
+        <span className="ml-2.5 mr-10">Cart</span>
+      </Link>
+      <LoginDialog open={open} setOpen={setOpen} />
+    </div>
   );
 };
 export default LoginButton;

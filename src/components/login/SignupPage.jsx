@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useFcm } from "../../context/FcmProvider.jsx";
 import { useAuth } from "../../context/AuthProvider.jsx";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { parsePhoneNumber} from "react-phone-number-input";
+import { parsePhoneNumber } from "react-phone-number-input";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../common/form-input";
 import PhoneInput from "../common/phone-number-input";
 import FormSelect from "../common/FormSelect";
+import Button from "../common/button";
 import { signupSchema } from "../../validations/signupSchema.js";
 import FORM_KEYS from "../../constants/constants.js";
 import en from "../../locales/en.json";
@@ -39,7 +32,7 @@ export const SignupPage = ({ setOpen }) => {
   const { token } = useFcm();
   const { login } = useAuth();
   const navigate = useNavigate();
-  
+
   const {
     control,
     handleSubmit,
@@ -50,12 +43,10 @@ export const SignupPage = ({ setOpen }) => {
     mode: "onBlur",
   });
 
-
   const onSubmit = async (values) => {
     setIsSubmitting(true);
     setSubmitError(null);
     setSubmitSuccess(null);
-  
 
     const phoneNumber = values.phone ? parsePhoneNumber(values.phone) : undefined;
 
@@ -90,75 +81,46 @@ export const SignupPage = ({ setOpen }) => {
   };
 
   return (
-    <Box
-      sx={{
-        minHeight: "0",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        bgcolor: "var(--background-primary)",
-        px: 2,
-        py:0,
-      }}
-    >
-      <Container maxWidth="sm">
-        <Paper
-          elevation={3}
-          sx={{
-            p: 4,
-            borderRadius: 3,
-            bgcolor: "var(--color-white)",
-          }}
-        >
-          <Box mb={3} textAlign="center">
+    <div className="flex min-h-0 items-center justify-center bg-bg-primary px-2">
+      <div className="mx-auto w-full max-w-[600px] px-4">
+        <div className="rounded-[12px] bg-white p-8 shadow-[0_3px_5px_-1px_rgba(0,0,0,0.2),0_6px_10px_0_rgba(0,0,0,0.14),0_1px_18px_0_rgba(0,0,0,0.12)]">
+          <div className="mb-8 text-center">
             {LOGO && (
-              <Box sx={{ mb: 2 }}>
+              <div className="mb-5">
                 <img
                   src={LOGO}
                   alt="Application Logo"
-                  style={{ maxWidth: "150px", height: "auto" }}
+                  className="mx-auto h-auto max-w-[150px]"
                 />
-              </Box>
+              </div>
             )}
-            <Typography
-              variant="h5"
-              sx={{ color: "var(--color-text-primary)", fontWeight: 600, marginTop: "5px", marginBottom: "10px" }}
-             >
+            <h5 className="mt-[5px] mb-2.5 text-xl font-semibold text-text-primary">
               {t?.title}
-            </Typography>
+            </h5>
             {t?.subtitle && (
-              <Typography
-                variant="body2"
-                sx={{ color: "var(--color-text-secondary)", mt: 1 }}
-              >
-                {t.subtitle}
-              </Typography>
+              <p className="mt-2 text-sm text-text-secondary">{t.subtitle}</p>
             )}
-          </Box>
+          </div>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <FormInput
-                  name={FORM_KEYS.FIRST_NAME}
-                  control={control}
-                  label={t?.labels?.firstName || "First Name"}
-                  error={errors[FORM_KEYS.FIRST_NAME]}
-                  tabIndex={1}
-                />
-              </Grid>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <FormInput
+                name={FORM_KEYS.FIRST_NAME}
+                control={control}
+                label={t?.labels?.firstName || "First Name"}
+                error={errors[FORM_KEYS.FIRST_NAME]}
+                tabIndex={1}
+              />
 
-              <Grid item xs={12} sm={6}>
-                <FormInput
-                  name={FORM_KEYS.LAST_NAME}
-                  control={control}
-                  label={t?.labels?.lastName || "Last Name"}
-                  error={errors[FORM_KEYS.LAST_NAME]}
-                  tabIndex={2}
-                />
-              </Grid>
+              <FormInput
+                name={FORM_KEYS.LAST_NAME}
+                control={control}
+                label={t?.labels?.lastName || "Last Name"}
+                error={errors[FORM_KEYS.LAST_NAME]}
+                tabIndex={2}
+              />
 
-              <Grid item xs={12}>
+              <div className="sm:col-span-2">
                 <FormInput
                   name={FORM_KEYS.USER_NAME}
                   control={control}
@@ -166,9 +128,9 @@ export const SignupPage = ({ setOpen }) => {
                   error={errors[FORM_KEYS.USER_NAME]}
                   tabIndex={3}
                 />
-              </Grid>
+              </div>
 
-              <Grid item xs={12}>
+              <div className="sm:col-span-2">
                 <FormInput
                   name={FORM_KEYS.EMAIL}
                   control={control}
@@ -177,22 +139,22 @@ export const SignupPage = ({ setOpen }) => {
                   type="email"
                   tabIndex={4}
                 />
-              </Grid>
+              </div>
 
-              <Grid item xs={12}>
+              <div className="sm:col-span-2">
                 <PhoneInput
                   name={FORM_KEYS.PHONE}
                   control={control}
                   countries={ALLOWED_COUNTRIES}
                   label={t?.labels?.phone || "Phone Number"}
                   error={errors[FORM_KEYS.PHONE]}
-                  international      
+                  international
                   defaultCountry={DEFAULT_COUNTRY}
                   tabIndex={5}
                 />
-              </Grid>
+              </div>
 
-              <Grid item xs={12}>
+              <div className="sm:col-span-2">
                 <FormInput
                   name={FORM_KEYS.PASSWORD}
                   control={control}
@@ -200,9 +162,9 @@ export const SignupPage = ({ setOpen }) => {
                   error={errors[FORM_KEYS.PASSWORD]}
                   type="password"
                 />
-              </Grid>
+              </div>
 
-              <Grid item xs={12}>
+              <div className="sm:col-span-2">
                 <FormSelect
                   name={FORM_KEYS.ROLE}
                   control={control}
@@ -211,59 +173,39 @@ export const SignupPage = ({ setOpen }) => {
                   options={roleOptions}
                   tabIndex={6}
                 />
-              </Grid>
-            </Grid>
+              </div>
+            </div>
 
             {submitError && (
-              <Box mt={2}>
-                <Typography
-                  variant="body2"
-                  sx={{ color: "#d32f2f" }}
-                >
-                  {submitError}
-                </Typography>
-              </Box>
+              <div className="mt-4">
+                <p className="text-sm text-error">{submitError}</p>
+              </div>
             )}
 
             {submitSuccess && (
-              <Box mt={2}>
-                <Typography
-                  variant="body2"
-                  sx={{ color: "#2e7d32" }}
-                >
-                  {submitSuccess}
-                </Typography>
-              </Box>
+              <div className="mt-4">
+                <p className="text-sm text-success-dark">{submitSuccess}</p>
+              </div>
             )}
 
-            <Box mt={3}>
+            <div className="mt-6">
               <Button
                 type="submit"
-                fullWidth
-                variant="contained"
                 disabled={isSubmitting || Object.keys(errors).length > 0}
-                sx={{
-                  textTransform: "none",
-                  borderRadius: 2,
-                  bgcolor: "#51875f",
-                  "&:hover": {
-                    bgcolor: "#6ba99a",
-                  },
-                }}
+                className="w-full rounded-lg"
               >
                 {isSubmitting ? (
-                  <CircularProgress size={20} sx={{ color: "var(--color-white)" }} />
+                  <Loader2 size={20} className="animate-spin text-white" />
                 ) : (
                   t?.labels?.submit || "Sign Up"
                 )}
               </Button>
-            </Box>
+            </div>
           </form>
-        </Paper>
-      </Container>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default SignupPage;
-

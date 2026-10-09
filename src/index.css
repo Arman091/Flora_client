@@ -1,14 +1,61 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* src/index.css */
+
+/* ── Design tokens (single source of truth) ─────────────────────
+   Use these via Tailwind semantic classes (text-text-primary,
+   border-border-primary, text-error, bg-brand, …) which map to
+   these variables in tailwind.config.js. Add new tokens here
+   first, then map them in the config — never hardcode colors
+   in components. */
 :root {
+  /* text */
   --color-text-primary: #333333;
   --color-text-secondary: #666666;
+  --color-text-label: rgba(0, 0, 0, 0.6);
+  --color-text-muted: #878787;
+  /* surfaces */
   --color-white: #ffffff;
   --color-header-bg: #ffffff;
-  --background-primary:#ffffff;
-  --loader-color:#FFB7CE;
-  --border-primary:"#0000003B";
+  --background-primary: #ffffff;
+  /* borders */
+  --border-primary: #0000003B; /* rgba(0,0,0,0.23) — was broken with quotes */
+  --border-divider: #0000001f; /* MUI default divider color */
+  --border-product-image: #f0f0f0;
+  --border-grey: grey;
+  --color-focus: #1976d2;
+  /* home / product listing */
+  --color-deal-band: #FEFFEC;
+  --color-carousel-bg: #FEFEEC;
+  --color-product-card: #fbf5e4;
+  --color-product-card-hover: #FEFEEC;
+  --color-product-title: #33b8a9;
+  --color-blue: blue;
+  --color-timer: #7f7f7f;
+  /* status */
+  --color-error: #d32f2f;
+  --color-success: #008000; /* CSS `green` keyword */
+  --color-success-dark: #2e7d32; /* MUI success.dark — signup success msg */
+  /* cart */
+  --color-cart-empty: #00527c;
+  --color-cart-cta: rgb(83, 21, 21);
+  --color-maroon: maroon;
+  --color-remove: #679289;
+  --color-qty-btn: #9A031E;
+  --color-price-header: #DBDEBA;
+  --color-price-panel: #278d8d;
+  /* brand */
+  --color-brand: #51875f;
+  --color-brand-hover: #6ba99a;
+  --color-badge: #9c27b0; /* MUI secondary — cart badge */
+  --color-hover-overlay: rgba(0, 0, 0, 0.04); /* MUI MenuItem hover */
+  /* misc */
+  --loader-color: #FFB7CE;
+  --text-aqua-primary: #005fb890; /* referenced by scrollbar hover, was undefined */
+  --field-height: 40px;
+  --radius-md: 4px; /* field/control corners (matches Tailwind rounded-md) */
 }
 
 
@@ -51,3 +98,6 @@ code {
   border-radius: 8px;
   cursor: pointer;
 }
+/* form primitives migrated to native elements (step 4) */
+
+/* reusable Button component (src/components/common/button.jsx) */

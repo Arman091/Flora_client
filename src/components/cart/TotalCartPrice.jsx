@@ -1,35 +1,8 @@
-import { Box, styled, Typography, Button } from "@mui/material";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ORDER_CONFIRMATION } from "../../constants/routes";
-const RightHeader = styled(Box)`
-  padding: 20px 25px;
-  text-align: center;
-  background: #DBDEBA;
-  color:black;
-  font-weight:Bold;
-  margin-top:50px;
-  border-bottom: 1px solid grey;
-`;
-
-const Rupees = styled(Box)`
-  float: right;
-`;
-const RightDownBox = styled(Box)`
-  padding: 20px 20px;
-  background-color: #278d8d;
-  color:white;
-  & > p {
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
-`;
-
-const RightBox = styled(Box)`
-  // box-shadow: 0 -2px 10px 0 rgb(0 0 0/20%);
-  height: 100%;
-`;
+import Button from "../common/button";
 
 const TotalCartPrice = ({ cartItems }) => {
   const [price, setPrice] = useState(0);
@@ -54,44 +27,37 @@ const TotalCartPrice = ({ cartItems }) => {
     setPrice(price);
     setDiscount(discount);
   };
-  
+
   return (
-    <RightBox>
-      <RightHeader>
-        <Typography>ORDER PRICE DETAILS</Typography>
-      </RightHeader>
-      <RightDownBox>
-        <Typography>
+    <div className="h-full">
+      <div className="mt-[50px] border-b border-grey bg-price-header px-[25px] py-5 text-center font-bold text-black">
+        <p>ORDER PRICE DETAILS</p>
+      </div>
+      <div className="bg-price-panel p-5 text-white">
+        <p className="mb-5 text-sm">
           Price of {cartItems?.length} item
-          <Rupees component="span">₹{price}</Rupees>
-        </Typography>
-        <Typography>
+          <span className="float-right">₹{price}</span>
+        </p>
+        <p className="mb-5 text-sm">
           Discount on {cartItems?.length} item
-          <Rupees component="span">-₹{discount}</Rupees>
-        </Typography>
-        <Typography>
+          <span className="float-right">-₹{discount}</span>
+        </p>
+        <p className="mb-5 text-sm">
           Delivery Charges of {cartItems?.length} item
-          <Rupees component="span">₹20</Rupees>
-        </Typography>
-        <Typography variant="h5">
+          <span className="float-right">₹20</span>
+        </p>
+        <h5 className="mb-5 text-xl">
           Total Ammount of {cartItems?.length} item
-          <Rupees component="span">₹{price - discount + 20}</Rupees>
-        </Typography>
-        <Typography style={{ color: "maroon", fontWeight: "500", fontSize: 15, marginTop:"19px" }}>
+          <span className="float-right">₹{price - discount + 20}</span>
+        </h5>
+        <p className="mb-5 mt-[19px] text-[15px] font-medium text-maroon">
           Congratulations.......You will save ₹{discount - 20} on this order
-        </Typography>
-      </RightDownBox>
-      <Button
-        onClick={() => confirmed()}
-        style={{
-          width: "100%",
-          background: "maroon",
-          color: "white",
-        }}
-      >
+        </p>
+      </div>
+      <Button onClick={() => confirmed()} className="w-full bg-maroon">
         Order Now
       </Button>
-    </RightBox>
+    </div>
   );
 };
 

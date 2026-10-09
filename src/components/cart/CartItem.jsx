@@ -1,65 +1,45 @@
 import React from "react";
-import { Box, Button, styled, Typography } from "@mui/material";
 import OperationButton from "./OperationButton";
 import { removeFromCart } from "../../redux/actions/cartAction";
-import { useDispatch } from "react-redux"; 
-
-const ComponentWraper = styled(Box)`
-  border-top: 1px solid grey;
-  display: flex;
-  background: #FEFFEC;
-  border-radius: 3px;
-  margin-top:2px;
-`;
-const LeftBox = styled(Box)`
-  margin: 15px;
-  display: flex;
-  flex-direction: column;
-  font-family:cursive;
-`;
-
-const RemoveButton = styled(Button)`
-  margin-top: 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #679289;
-  border-radius: 3px;
-`;
+import { useDispatch } from "react-redux";
+import Button from "../common/button";
 
 const CartItem = ({ item }) => {
-
-const dispatch = useDispatch()
-  const removeItem =(id)=>{
-dispatch(removeFromCart(id))
-
-  }
-
+  const dispatch = useDispatch();
+  const removeItem = (id) => {
+    dispatch(removeFromCart(id));
+  };
 
   return (
-    <ComponentWraper style={{  }}>
-      <Box>
-        <img src={item.url} alt="cartItem" style={{height: 110, width: 110}} />
+    <div className="mt-0.5 flex rounded-[3px] border-t border-grey bg-deal-band">
+      <div>
+        <img
+          src={item.url}
+          alt="cartItem"
+          className="h-[110px] w-[110px]"
+        />
         <OperationButton />
-      </Box>
-      <LeftBox>
-        <Typography>{item.title.longTitle}</Typography>
-        <Typography>{item.title.sortTitle}</Typography>
-         
-        <Typography style={{ margin: "10px 0" }}>
-          <Box component="span" style={{ fontSize: 28 }}>
-            ₹{item.price.cost}
-          </Box>
+      </div>
+      <div className="m-[15px] flex flex-col font-[cursive]">
+        <p>{item.title.longTitle}</p>
+        <p>{item.title.sortTitle}</p>
+        <p className="my-2.5">
+          <span className="text-[28px]">₹{item.price.cost}</span>
           &nbsp;
-          <Box component="span">
+          <span>
             <strike>₹{item.price.mrp}</strike>
-          </Box>
+          </span>
           &nbsp;
-          <Box component="span">{item.price.discount}</Box>
-        </Typography>
-        <RemoveButton onClick={()=> removeItem(item.id)}>Remove</RemoveButton>
-      </LeftBox>
-
-    </ComponentWraper>
+          <span>{item.price.discount}</span>
+        </p>
+        <Button
+          onClick={() => removeItem(item.id)}
+          className="mt-5 rounded-[3px] bg-remove text-base"
+        >
+          Remove
+        </Button>
+      </div>
+    </div>
   );
 };
 

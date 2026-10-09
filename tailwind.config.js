@@ -1,0 +1,61 @@
+module.exports = {
+  content: ["./src/**/*.{js,jsx}", "./public/index.html"],
+  theme: {
+    extend: {
+      // All color classes map to design tokens defined in src/index.css.
+      // Add the token in :root first, then expose it here.
+      colors: {
+        white: "var(--color-white)",
+        "text-primary": "var(--color-text-primary)",
+        "text-secondary": "var(--color-text-secondary)",
+        "text-label": "var(--color-text-label)",
+        "text-muted": "var(--color-text-muted)",
+        "cart-empty": "var(--color-cart-empty)",
+        "cart-cta": "var(--color-cart-cta)",
+        maroon: "var(--color-maroon)",
+        remove: "var(--color-remove)",
+        "qty-btn": "var(--color-qty-btn)",
+        "price-header": "var(--color-price-header)",
+        "price-panel": "var(--color-price-panel)",
+        success: "var(--color-success)",
+        "success-dark": "var(--color-success-dark)",
+        "bg-primary": "var(--background-primary)",
+        "header-bg": "var(--color-header-bg)",
+        "border-primary": "var(--border-primary)",
+        divider: "var(--border-divider)",
+        grey: "var(--border-grey)",
+        "product-image": "var(--border-product-image)",
+        focus: "var(--color-focus)",
+        error: "var(--color-error)",
+        success: "var(--color-success)",
+        brand: "var(--color-brand)",
+        "brand-hover": "var(--color-brand-hover)",
+        badge: "var(--color-badge)",
+        "hover-overlay": "var(--color-hover-overlay)",
+        "deal-band": "var(--color-deal-band)",
+        "carousel-bg": "var(--color-carousel-bg)",
+        "product-card": "var(--color-product-card)",
+        "product-card-hover": "var(--color-product-card-hover)",
+        "product-title": "var(--color-product-title)",
+        blue: "var(--color-blue)",
+        timer: "var(--color-timer)",
+        loader: "var(--loader-color)",
+      },
+      height: {
+        field: "var(--field-height)",
+      },
+      borderRadius: {
+        md: "var(--radius-md)",
+      },
+    },
+    // Match MUI breakpoints so max-* variants align with legacy styles
+    screens: {
+      xs: "0px",
+      sm: "600px",
+      md: "900px",
+      lg: "1200px",
+      xl: "1536px",
+    },
+  },
+  plugins: [],
+};

@@ -1,25 +1,13 @@
-import { Box, Button, ButtonGroup, styled } from "@mui/material";
 import React from "react";
+import Button from "../common/button";
 
-const ButtonGrp = styled(ButtonGroup)`
-  margin-top: 82px;
-  border-radius: 0%;
-  
-`;
-
-const ButtonCSS = styled(Button)`
-  border-radius: 50%;
-  color:white;
-  background-color:#9A031E;
-border: none;
-`;
 const OperationButton = () => {
   return (
-    <ButtonGrp>
-      <ButtonCSS>-</ButtonCSS>
-      <ButtonCSS>1</ButtonCSS>
-      <ButtonCSS>+</ButtonCSS>
-    </ButtonGrp>
+    <div className="mt-[82px] flex">
+      <Button className="rounded-full bg-qty-btn min-w-[64px]">-</Button>
+      <Button className="rounded-full bg-qty-btn min-w-[64px]">1</Button>
+      <Button className="rounded-full bg-qty-btn min-w-[64px]">+</Button>
+    </div>
   );
 };
 
