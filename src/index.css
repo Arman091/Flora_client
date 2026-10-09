@@ -37,6 +37,7 @@
   /* status */
   --color-error: #d32f2f;
   --color-success: #008000; /* CSS `green` keyword */
+  --color-success-dark: #2e7d32; /* MUI success.dark — signup success msg */
   /* cart */
   --color-cart-empty: #00527c;
   --color-cart-cta: rgb(83, 21, 21);

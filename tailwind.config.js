@@ -18,6 +18,7 @@ module.exports = {
         "price-header": "var(--color-price-header)",
         "price-panel": "var(--color-price-panel)",
         success: "var(--color-success)",
+        "success-dark": "var(--color-success-dark)",
         "bg-primary": "var(--background-primary)",
         "header-bg": "var(--color-header-bg)",
         "border-primary": "var(--border-primary)",
