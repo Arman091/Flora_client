@@ -2,17 +2,7 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { bannerData } from "../../constants/data";
-import { styled } from "@mui/material";
-import "./Banner.css"
-const Images = styled("img")(({ theme }) => ({
-  width: "92%",
-  height: "360px",
-  'margin-left': "62px",
-  [theme.breakpoints.down("sm")]: {
-    objectFit: "cover",
-    height: 180,
-  },
-}));
+import "./Banner.css";
 
 const responsive = {
   desktop: {
@@ -44,7 +34,12 @@ const Banner = () => {
       keyBoardControl={true}
     >
       {bannerData.map((data) => (
-        <Images key={data.id} src={data.url} alt="" />
+        <img
+          key={data.id}
+          src={data.url}
+          alt=""
+          className="ml-[62px] h-[360px] w-[92%] max-sm:h-[180px] max-sm:object-cover"
+        />
       ))}
     </Carousel>
   );
